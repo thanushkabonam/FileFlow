@@ -1,36 +1,31 @@
-# FileFlow — Frontend-only React project
+# FileFlow 2.0 — Frontend-only React application
 
-This version uses only React, JavaScript, CSS, browser LocalStorage and IndexedDB. It does not require Supabase, a database server, API keys or paid backend services.
+## Run
+```bash
+npm install
+npm run dev
+```
 
-## Run locally
-1. Install Node.js LTS: https://nodejs.org/
-2. Open this folder in VS Code.
-3. In the terminal run:
-   ```bash
-   npm install
-   npm run dev
-   ```
-4. Open the local URL printed by Vite (usually http://localhost:5173).
+## Demo administrator
+Email: `admin@fileflow.demo`  
+Password: `Admin@123`
 
-## Features
-- Create account and login demo flow
-- Responsive dashboard and navigation
-- Upload files and keep their binary data in IndexedDB
-- Download and delete uploaded files
-- Create folders and categorize uploads
-- Search files, recent activity and basic analytics
-- Native device file sharing where the browser supports Web Share API
+Create regular users with Sign up. To demonstrate sharing:
+1. Log in as a regular user and upload a file.
+2. Click the Share icon and enter the second registered user's email.
+3. Log out and log in as that recipient in the same browser.
+4. Open Received to download the shared file.
 
-## Important limitations
-- Accounts are demo-only. Credentials are stored in this browser and are not secure. Do not use real passwords.
-- Files are saved only in the current browser/device. They are not uploaded to a server.
-- The Share action opens the device's native share sheet if supported. Otherwise it downloads the file so you can attach it yourself. It does not create a public URL or provide cross-device sharing.
-- Clearing browser site data may delete the locally stored accounts and files.
-- Vercel hosting publishes the frontend application only; it does not make each visitor's local files available to other users.
+## React concepts
+- Reusable components and props: `FileCard`, `Stat`, `Layout`, `Upload`.
+- React Router: page routes and nested role-protected layouts.
+- Context API: `AuthProvider` and `useAuth`.
+- Hooks: `useState`, `useEffect`, `useContext`.
+- Controlled forms, conditional rendering, lists and keys.
+- Role-based route guards for user and admin areas.
 
-## Deploy on Vercel
-1. Push the project to GitHub.
-2. Visit https://vercel.com/new and import your GitHub repository.
-3. Select Vite (usually detected automatically).
-4. Build command: `npm run build`; output directory: `dist`.
-5. Deploy. No environment variables are required.
+## Frontend-only limitations
+Accounts and metadata use LocalStorage; file blobs use IndexedDB. Sharing is an in-app permission/record workflow between accounts in the same browser. It cannot transfer files across different devices/browsers. Demo credentials and roles are not secure: this is an educational frontend demonstration, not production authentication. A real cross-device sharing platform requires a backend/cloud service.
+
+## Deploy
+Push to your existing GitHub repository. Vercel should automatically redeploy. Build command `npm run build`, output folder `dist`. No environment variables required.
